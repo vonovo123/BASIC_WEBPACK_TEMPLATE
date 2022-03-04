@@ -2,8 +2,16 @@ const path = require('path')
 const Htmlplugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
+    //확장자 제외
+  resolve : {
+    extensions: ['.js'],
+    alias: {
+      '~' : path.resolve(__dirname, 'src'),
+      'assets' : path.resolve(__dirname, 'src/assets')
+    }
+  },
   //파일 진입점(상대경로)
-  entry: './js/main.js',
+  entry: './src/main.js',
 
   //결과물을 반환하는 설정
   output : {
@@ -26,6 +34,12 @@ module.exports = {
         test : /\.js$/,
         use :[
           'babel-loader'
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp)$/,
+        use : [
+          'file-loader'
         ]
       }
     ]
